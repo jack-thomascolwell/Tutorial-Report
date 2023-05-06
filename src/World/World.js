@@ -1,7 +1,7 @@
 import { createCamera } from './components/camera.js';
 import { createScene } from './components/scene.js';
 import { createLights } from './components/lights.js';
-import { Train } from './components/Train/Train.js';
+import { loadBirds } from './components/birds/birds.js';
 
 import { createRenderer } from './systems/renderer.js';
 import { Resizer } from './systems/Resizer.js';
@@ -18,16 +18,20 @@ class World {
         loop = new Loop(camera, scene, renderer);
         container.append(renderer.domElement);
 
-        const controls = createControls(camera, renderer.domElement);
-
-        const train = new Train();
+        controls = createControls(camera, renderer.domElement);
 
         const lights = createLights();
-        scene.add(train, lights);
+        scene.add(lights);
 
-        loop.updatables.push(controls, train);
+        loop.updatables.push(controls);
 
         const resizer = new Resizer(container, camera, renderer);
+    }
+
+    async init() {
+        const birds = await loadBirds();
+        controls.target.copy(birds.position);
+        scene.add(birds);
     }
 
     render() {
