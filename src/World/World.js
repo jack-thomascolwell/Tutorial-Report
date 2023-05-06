@@ -1,7 +1,7 @@
 import { createCamera } from './components/camera.js';
-import { createMeshGroup } from './components/meshGroup.js';
 import { createScene } from './components/scene.js';
 import { createLights } from './components/lights.js';
+import { Train } from './components/Train/Train.js';
 
 import { createRenderer } from './systems/renderer.js';
 import { Resizer } from './systems/Resizer.js';
@@ -20,12 +20,12 @@ class World {
 
         const controls = createControls(camera, renderer.domElement);
 
-        const meshGroup = createMeshGroup();
+        const train = new Train();
 
         const lights = createLights();
-        scene.add(meshGroup, lights);
+        scene.add(train, lights);
 
-        loop.updatables.push(controls, meshGroup);
+        loop.updatables.push(controls, train);
 
         const resizer = new Resizer(container, camera, renderer);
     }
