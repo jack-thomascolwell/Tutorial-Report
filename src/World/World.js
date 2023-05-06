@@ -32,6 +32,7 @@ class World {
         const birds = await loadBirds();
         controls.target.copy(birds.position);
         scene.add(birds);
+        loop.updatables.push(birds);
     }
 
     render() {

@@ -18,6 +18,11 @@ async function loadBirds() {
 
     const birds = new Group()
     birds.add(parrot, flamingo, stork);
+    birds.tick = (delta) => {
+        parrot.tick(delta);
+        flamingo.tick(delta);
+        stork.tick(delta);
+    }
     return birds;
 }
 
